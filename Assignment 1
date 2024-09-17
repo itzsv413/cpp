@@ -1,0 +1,200 @@
+#include <iostream>
+#include<iomanip>
+#include<cstring>
+using namespace std;
+struct student{
+    unsigned int Roll_no;
+    char Name[50];
+    float SGPA;
+};
+class SBD{
+    private:
+    student s[10];
+    int n;
+   
+    public:
+    void accept(void);
+    void display(void);
+    void bubblesort(void);
+    int LinearSearch(int no);
+    int BinarySearch(int no);
+    void insertsort(void);
+};
+void SBD::accept(){
+    cout<<"no of student:";
+    cin>>n;
+    for (int i=0;i<n;i++){
+        cout<<"enter rollno:";
+        cin>>s[i].Roll_no;
+        cout<<"enter name:";
+        cin>>s[i].Name;
+        cout<<"enter sgpa:";
+        cin>>s[i].SGPA;
+    }
+}
+void SBD::display(){
+    cout<<setw(10)<<"Roll no"<<setw(10)<<"Name"<<setw(10) <<"SGPA";
+    for(int i=0;i<n;i++){
+       
+        cout<<endl<<setw(10)<<s[i].Roll_no;
+        cout<<setw(10)<<s[i].Name<<setw(10)<<s[i].SGPA;
+    }
+}
+void SBD::bubblesort(){
+    int i,j;
+    student temp;
+    for(i=1;i<=n-1;i++){
+        for(j=0;j<=n-2;j++){
+            if(s[j].Roll_no>s[j+1].Roll_no){
+                temp=s[j];
+                s[j]=s[j+1];
+                s[j+1]=temp;
+            }
+        }
+    }
+}
+int SBD::LinearSearch(int no){
+    for(int i = 0 ;i<n ; i++){
+        if(no == s[i].Roll_no){
+            cout<<endl<<"Found at index:";
+            return i;
+        }
+    }
+    return -1;
+}
+int SBD::BinarySearch(int no){
+    int mid ,low,high;
+    low = 0;
+    high = n-1;
+    while(low<=high){
+        mid = (low+high)/2;
+        if(s[mid].Roll_no == no){
+            return mid;
+        }
+        else if(s[mid].Roll_no >no){
+            high = mid -1;
+        }
+        else{
+            low = mid +1;
+        }
+    }
+    return -1;
+}
+void SBD::insertsort() {
+    student key;
+    int j;
+    for (int i = 1; i < n; i++) {
+        key = s[i];
+        j = i - 1;
+        while (j >= 0 && strcmp(s[j].Name, key.Name) > 0) {
+            s[j + 1] = s[j];
+            j--;
+        }
+        s[j + 1] = key;
+    }
+}
+int main() {
+    int a;
+     SBD s;
+     s.accept();
+     int choice=1;
+     do{
+     cout<<endl<<"-------------------Menu---------------\n";
+     cout<<"1.Bubblesort\n2.Linear Search\n3.Binary Search\n";
+     cout<<"4.Insertion Sort\n5.Exit";
+     cout<<"\nWhat operation would you like to perform?:";
+     cin>>choice;
+     switch(choice)
+     {
+         case 1:
+            s.bubblesort();
+            s.display();
+            break;
+        case 2:
+            cout<<endl<<"Enter roll number number to search:";
+            cin>>a;
+            cout<<s.LinearSearch(a);
+            break;
+        case 3:
+            cout<<endl<<"Enter roll number number to search:";
+            cin>>a;
+            cout<<endl<<"Found at Index:"<<s.BinarySearch(a);
+            break;
+        case 4:
+             s.insertsort();
+             s.display();
+             break;
+       case 5:
+           cout<<"Exiting......";
+           break;
+        default:
+        cout<<"Invalid Input";
+        break;
+     }
+     }while(choice!=5);
+    return 0;
+}
+//output
+no of student:3
+enter rollno:3
+enter name:Om
+enter sgpa:9.6
+enter rollno:1
+enter name:Sachin
+enter sgpa:9.8
+enter rollno:2
+enter name:Pravin
+enter sgpa:8.8
+
+-------------------Menu---------------
+1.Bubblesort
+2.Linear Search
+3.Binary Search
+4.Insertion Sort
+5.Exit
+What operation would you like to perform?:1
+   Roll no      Name      SGPA
+         1    Sachin       9.8
+         2    Pravin       8.8
+         3        Om       9.6
+-------------------Menu---------------
+1.Bubblesort
+2.Linear Search
+3.Binary Search
+4.Insertion Sort
+5.Exit
+What operation would you like to perform?:2
+
+Enter roll number number to search:2
+
+Found at index:1
+-------------------Menu---------------
+1.Bubblesort
+2.Linear Search
+3.Binary Search
+4.Insertion Sort
+5.Exit
+What operation would you like to perform?:3
+
+Enter roll number number to search:1
+
+Found at Index:0
+-------------------Menu---------------
+1.Bubblesort
+2.Linear Search
+3.Binary Search
+4.Insertion Sort
+5.Exit
+What operation would you like to perform?:4
+   Roll no      Name      SGPA
+         3        Om       9.6
+         2    Pravin       8.8
+         1    Sachin       9.8
+-------------------Menu---------------
+1.Bubblesort
+2.Linear Search
+3.Binary Search
+4.Insertion Sort
+5.Exit
+What operation would you like to perform?:5
+Exiting......
