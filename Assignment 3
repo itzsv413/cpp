@@ -1,0 +1,110 @@
+#define SIZE 5
+#include<iostream>
+using namespace std;
+class CQ
+{
+private:
+     int q[SIZE];
+     int f;//front
+     int r;//rear
+public:
+     CQ(void)
+     {f=r=0;}
+     int qfull(void);
+     void insertq(int item);
+     int deleteq(void);
+     void disq(void);
+};
+int CQ::qfull(void)
+{
+if((r+1)%SIZE==f)
+return 1;
+else
+return 0;
+}
+void CQ::insertq(int item)
+{
+    r=(r+1)%SIZE;
+    q[r]=item;
+}
+int CQ::deleteq(void)
+{
+    f=(f+1)%SIZE;
+    return(q[f]);
+}
+void CQ::disq(void)
+{
+    int i;
+    i=(f+1)%SIZE;
+    while(i!=(r+1)%SIZE)
+    {
+    cout<<q[i]<<" ";
+    i=(i+1)%SIZE;
+    }
+}
+int main(void)
+{
+CQ Q;
+int choice=1;
+do{
+    cout<<"\n-----------Menu-------------";
+    cout<<"\n1.Insert element\n2.Delete element\n3.Exit";
+    cout<<"\nWhat operation you want to perform?:";
+    cin>>choice;
+    switch(choice)
+    {
+        case 1:
+         int n;
+         cout<<"Enter elements";
+         cin>>n;
+         Q.insertq(n);
+         Q.disq();
+         break;
+        case 2:
+         Q.deleteq();
+         Q.disq();
+         break;
+        case 3:
+         cout<<"Exiting.......";
+         break;
+        default:
+         cout<<"Invalid input";
+         break;
+    }
+    }while(choice!=3);
+return 0;
+}
+//output
+-----------Menu-------------
+1.Insert element
+2.Delete element
+3.Exit
+What operation you want to perform?:1
+Enter elements2
+2 
+-----------Menu-------------
+1.Insert element
+2.Delete element
+3.Exit
+What operation you want to perform?:1
+Enter elements3
+2 3 
+-----------Menu-------------
+1.Insert element
+2.Delete element
+3.Exit
+What operation you want to perform?:2
+3 
+-----------Menu-------------
+1.Insert element
+2.Delete element
+3.Exit
+What operation you want to perform?:1
+Enter elements2
+3 2 
+-----------Menu-------------
+1.Insert element
+2.Delete element
+3.Exit
+What operation you want to perform?:3
+Exiting.......
